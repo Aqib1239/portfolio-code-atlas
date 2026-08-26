@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center pb-20 pt-28"
+      className="relative flex min-h-[100svh] items-center pb-20 pt-20"
     >
       <div className="container-page">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
@@ -45,13 +45,26 @@ export function Hero() {
             initial="hidden"
             animate="visible"
           >
-            <motion.span variants={fadeUp} className="eyebrow mb-6">
-              {profile?.greeting ?? `Based in ${siteConfig.location}`}
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/[0.08] px-4 py-1.5 font-mono text-[0.8rem] capitalize text-accent-bright shadow-[0_0_20px_rgba(255,255,255,0.08),0_0_40px_rgba(255,255,255,0.04)] backdrop-blur-sm transition-all duration-300 hover:border-accent/70 hover:bg-accent/[0.12]"
+            >
+              {profile?.icon ? (
+                <Icon
+                  name={profile.icon}
+                  size={14}
+                  className="shrink-0 text-accent-bright"
+                />
+              ) : null}
+
+              <span>
+                {profile?.greeting ?? `Based in ${siteConfig.location}`}
+              </span>
             </motion.span>
 
             <motion.h1
               variants={fadeUp}
-              className="font-display text-[clamp(2.5rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-tight"
+              className="mt-4 font-display text-[clamp(2.5rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-tight"
             >
               Hi, I&apos;m{" "}
               <span className="text-gradient">{siteConfig.shortName}</span>.
@@ -115,10 +128,7 @@ export function Hero() {
               </Button>
             </motion.div>
 
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 flex flex-col gap-4"
-            >
+            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-4">
               <SocialLinks />
               <div className="flex flex-col gap-2">
                 <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-subtle">

@@ -9,6 +9,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
+import { Education } from "@/components/sections/Education";
 
 /** Two-digit reading-order marker, e.g. 1 → "01". */
 function pad(n: number): string {
@@ -69,7 +70,16 @@ export function ProfileSections() {
                 eyebrow={f.eyebrow}
                 title={f.title}
                 description={f.description}
-                showEducation={exp.options.showEducation}
+              />
+            );
+          case "education":
+            return (
+              <Education
+                key={key}
+                index={index}
+                eyebrow={f.eyebrow}
+                title={f.title}
+                description={f.description}
               />
             );
           case "projects":

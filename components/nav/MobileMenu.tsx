@@ -25,7 +25,7 @@ type MobileMenuProps = {
 /** Full-screen animated mobile navigation. Sits below the header (z-40),
  *  so the header's logo + close toggle stay visible on top. */
 export function MobileMenu({ activeId, onClose }: MobileMenuProps) {
-  const { profileId, openSelector } = useProfile();
+  const { profileId } = useProfile();
   const navItems = useMemo(() => getNavItems(profileId), [profileId]);
   useLockBodyScroll(true);
 
@@ -56,7 +56,7 @@ export function MobileMenu({ activeId, onClose }: MobileMenuProps) {
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "flex items-center justify-between rounded-xl px-3 py-3.5 font-display text-2xl font-medium tracking-tight transition-colors",
+                    "flex items-center justify-between rounded-xl px-3 py-3.5 font-display text-xl font-medium tracking-tight transition-colors",
                     active
                       ? "text-foreground"
                       : "text-muted hover:text-foreground"
@@ -92,18 +92,6 @@ export function MobileMenu({ activeId, onClose }: MobileMenuProps) {
             <Icon name="download" size={16} />
             <span>Download Resume</span>
           </a>
-
-          <button
-            type="button"
-            onClick={() => {
-              onClose();
-              openSelector();
-            }}
-            className="btn btn-secondary btn-md w-full"
-          >
-            <Icon name="compass" size={16} />
-            <span>Change experience</span>
-          </button>
 
           <div className="flex items-center justify-between gap-3 pt-1">
             <div className="flex items-center gap-3">

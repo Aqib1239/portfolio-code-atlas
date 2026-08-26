@@ -14,7 +14,7 @@ import { MobileMenu } from "./MobileMenu";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { profileId, openSelector } = useProfile();
+  const { profileId } = useProfile();
   const navItems = useMemo(() => getNavItems(profileId), [profileId]);
   const sectionIds = useMemo(() => navItems.map((item) => item.id), [navItems]);
   const activeId = useScrollSpy(sectionIds);
@@ -84,16 +84,6 @@ export function Navbar() {
             {/* Actions */}
             <div className="flex items-center gap-2">
               <ThemeToggle />
-
-              <button
-                type="button"
-                onClick={openSelector}
-                aria-label="Change experience"
-                title="Change experience"
-                className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-border-strong hover:text-foreground md:inline-flex"
-              >
-                <Icon name="compass" size={17} />
-              </button>
 
               <a
                 href={contact.resume}
