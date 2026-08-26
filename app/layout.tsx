@@ -39,6 +39,11 @@ export const metadata: Metadata = {
 
   creator: siteConfig.name,
 
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+
   verification: {
     google: "DZ9vWb6RWzvWdRvH1ig8OJhJhohqqzelEJIypdQAL-E",
   },
