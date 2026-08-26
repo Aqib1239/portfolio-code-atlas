@@ -18,7 +18,7 @@ type ProfileSelectorProps = {
  */
 export function ProfileSelector({ onSelect, onSkip }: ProfileSelectorProps) {
   const panelRef = useRef<HTMLDivElement>(null);
-  const cards = profiles.filter((p) => p.id !== "explorer");
+  const cards = profiles.filter((p) => p.id !== "developer");
 
   useEffect(() => {
     panelRef.current?.focus();
