@@ -40,8 +40,7 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
 
   icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/icon.svg",
   },
 
   verification: {

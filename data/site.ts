@@ -45,7 +45,7 @@ export const siteConfig = {
     "I build fast, scalable and polished web experiences with modern JavaScript.",
   // Canonical URL — currently the existing live portfolio (real, provided).
   // Change to this rebuild's deployment URL once it is live.
-  url: "https://maqibportfolio.vercel.app",
+  url: "https://maqib-sigma.vercel.app",
   keywords: [
     "MERN Stack Developer",
     "Frontend Developer",

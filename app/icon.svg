@@ -1,0 +1,30 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="512"
+  height="512"
+  viewBox="0 0 512 512"
+  role="img"
+  aria-labelledby="title"
+>
+  <title id="title">MA</title>
+
+  <rect
+    x="0"
+    y="0"
+    width="600"
+    height="600"
+    rx="96"
+    fill="#0a0a0b"
+  />
+
+  <text
+    x="256"
+    y="320"
+    text-anchor="middle"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="230"
+    font-weight="700"
+    letter-spacing="-6"
+    fill="#f7f7f5"
+  >MA</text>
+</svg>
