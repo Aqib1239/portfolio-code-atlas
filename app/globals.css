@@ -1,0 +1,649 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS  —  "Aqib" premium developer portfolio
+   Deep charcoal, violet/indigo accent, cyan support.
+   Exposed as CSS custom properties + Tailwind utilities.
+   ============================================================ */
+@theme {
+  /* ---- Surfaces & text ---- */
+  --color-background: #08080b;
+  --color-background-2: #0b0b11;
+  --color-surface: #101017;
+  --color-surface-2: #16161f;
+  --color-surface-hover: #1c1c28;
+  --color-foreground: #ededf2;
+  --color-muted: #a2a2ae;
+  --color-subtle: #70707d;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+
+  /* ---- Accent system ---- */
+  --color-accent-green: #d08700;
+  --color-accent: #7c6cf6;
+  --color-accent-bright: #9a8dff;
+  --color-accent-deep: #5a48d6;
+  --color-accent-2: #22d3ee;
+  --color-accent-3: #c084fc;
+
+  /* ---- Code syntax token (see CodeWindow) ---- */
+  --color-syntax-prop: #a9b1ff;
+
+  /* ---- Typography ---- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: var(--font-mono-space), ui-monospace, "SF Mono", "JetBrains Mono",
+    Menlo, Consolas, monospace;
+
+  /* ---- Radius ---- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
+
+  /* ---- Motion timing ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---- Named animations (Tailwind `animate-*`) ---- */
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 4s ease-in-out infinite;
+  --animate-gradient-pan: gradientPan 8s linear infinite;
+  --animate-blink: blink 1.1s steps(1) infinite;
+  --animate-scroll-hint: scrollHint 2s ease-in-out infinite;
+}
+
+/* ---- Keyframes ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
+@keyframes gradientPan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+@keyframes scrollHint {
+  0% { transform: translateY(0); opacity: 0; }
+  40% { opacity: 1; }
+  80% { transform: translateY(9px); opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent any accidental horizontal scroll on small screens */
+    overflow-x: hidden;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Only the html element should own horizontal clipping context */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 60%, transparent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-bright);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Custom scrollbar (desktop) */
+  @media (pointer: fine) {
+    ::-webkit-scrollbar { width: 11px; height: 11px; }
+    ::-webkit-scrollbar-track { background: var(--color-background); }
+    ::-webkit-scrollbar-thumb {
+      background: #26262f;
+      border-radius: 999px;
+      border: 3px solid var(--color-background);
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #34343f; }
+  }
+
+  /* Respect reduced motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   REUSABLE EFFECT CLASSES
+   ============================================================ */
+
+/* Accent gradient text */
+.text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-foreground) 0%,
+    var(--color-foreground) 40%,
+    var(--color-accent-bright) 70%,
+    var(--color-accent-2) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-accent-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-accent-bright),
+    var(--color-accent-2)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glassmorphism surface */
+.glass {
+  background: color-mix(in oklab, var(--color-surface) 72%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-border);
+}
+
+/* Elevated card shadow + accent-tinted */
+.shadow-elevated {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 20px 50px -20px rgba(0, 0, 0, 0.8);
+}
+.shadow-glow {
+  box-shadow: 0 0 45px -8px color-mix(in oklab, var(--color-accent) 45%, transparent);
+}
+
+/* Subtle blueprint grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Fine noise overlay */
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Radial accent glow blob */
+.orb {
+  border-radius: 999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+/* Thin gradient hairline (top border highlight) */
+.hairline-top {
+  position: relative;
+}
+.hairline-top::before {
+  content: "";
+  position: absolute;
+  inset-inline: 15%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-accent) 70%, transparent),
+    transparent
+  );
+}
+
+/* Animated conic border on hover (used by feature cards) */
+.shimmer-line {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.shimmer-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+.group:hover .shimmer-line::after {
+  animation: shimmer 1.1s var(--ease-out-quart) forwards;
+}
+
+/* Utility: hide scrollbars on horizontal scrollers */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Utility: mask fade on edges */
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+/* Accessible skip link — visible only on keyboard focus */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border-strong);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transform: translateY(-160%);
+  transition: transform 0.2s var(--ease-out-quart);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Section rhythm helpers */
+.section-py {
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+}
+.container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 5vw, 2.5rem);
+}
+
+/* Anchored sections clear the sticky navbar */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ============================================================
+   COMPONENT CLASSES
+   ============================================================ */
+
+/* ---- Monospace eyebrow / label (developer vernacular) ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-bright);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.4rem;
+  height: 1px;
+  background: color-mix(in oklab, var(--color-accent) 70%, transparent);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.25s, border-color 0.25s, box-shadow 0.35s,
+    color 0.25s, transform 0.25s var(--ease-out-quart);
+}
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.btn-sm { height: 2.25rem; padding-inline: 1rem; font-size: 0.8125rem; }
+.btn-md { height: 2.75rem; padding-inline: 1.35rem; font-size: 0.9rem; }
+.btn-lg { height: 3.05rem; padding-inline: 1.65rem; font-size: 0.95rem; }
+
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-deep));
+  box-shadow: 0 10px 30px -12px color-mix(in oklab, var(--color-accent) 75%, transparent);
+}
+.btn-primary:hover {
+  box-shadow: 0 16px 42px -12px color-mix(in oklab, var(--color-accent) 90%, transparent);
+}
+.btn-secondary {
+  color: var(--color-foreground);
+  background: color-mix(in oklab, var(--color-surface-2) 65%, transparent);
+  border-color: var(--color-border-strong);
+  backdrop-filter: blur(10px);
+}
+.btn-secondary:hover {
+  background: var(--color-surface-hover);
+  border-color: color-mix(in oklab, var(--color-accent) 45%, var(--color-border-strong));
+}
+.btn-ghost {
+  color: var(--color-muted);
+  background: transparent;
+}
+.btn-ghost:hover {
+  color: var(--color-foreground);
+  background: color-mix(in oklab, #ffffff 6%, transparent);
+}
+
+/* ---- Badges / chips ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.4rem 0.7rem;
+  white-space: nowrap;
+}
+.badge-outline {
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-muted);
+  background: color-mix(in oklab, var(--color-surface) 55%, transparent);
+}
+.badge-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  color: var(--color-accent-bright);
+  border: 1px solid color-mix(in oklab, var(--color-accent) 32%, transparent);
+  background: color-mix(in oklab, var(--color-accent) 12%, transparent);
+}
+
+/* ---- Cards ---- */
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-surface) 82%, transparent);
+  transition: border-color 0.3s, transform 0.3s var(--ease-out-quart),
+    background-color 0.3s;
+}
+.card-interactive:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 40%, var(--color-border-strong));
+  background: color-mix(in oklab, var(--color-surface-2) 88%, transparent);
+}
+
+/* Pointer spotlight overlay driven by --mx / --my */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--color-accent) 16%, transparent),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ---- Text link with animated underline ---- */
+.link-underline {
+  position: relative;
+  color: var(--color-muted);
+  transition: color 0.25s;
+}
+.link-underline:hover {
+  color: var(--color-foreground);
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  background: var(--color-accent-bright);
+  transition: transform 0.3s var(--ease-out-quart);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================================
+   LIGHT THEME
+   Activated by <html data-theme="light"> (see ThemeProvider +
+   no-FOUC script in layout.tsx). We override the SEMANTIC color
+   variables only — every Tailwind utility compiles to
+   var(--color-*), so the whole UI re-tints from this one block.
+   This is a purpose-built light palette, NOT an inversion:
+   cool paper background, near-black ink, and accents deepened
+   for legible contrast on white.
+   ============================================================ */
+:root[data-theme="light"] {
+  /* ---- Surfaces & text ---- */
+  --color-background: #f6f7fb;
+  --color-background-2: #eef1f8;
+  --color-surface: #ffffff;
+  --color-surface-2: #f2f3f8;
+  --color-surface-hover: #e9ebf3;
+  --color-foreground: #16161c;
+  --color-muted: #55555f;
+  --color-subtle: #8a8a95;
+  --color-border: rgba(16, 16, 22, 0.10);
+  --color-border-strong: rgba(16, 16, 22, 0.18);
+
+  /* ---- Accent system (deepened for contrast on white) ---- */
+  --color-accent: #6d5ef0;
+  --color-accent-bright: #5b46d9;
+  --color-accent-deep: #4c3ac0;
+  --color-accent-2: #0891ab;
+  --color-accent-3: #9333ea;
+
+  /* ---- Code syntax token ---- */
+  --color-syntax-prop: #5b46d9;
+
+  color-scheme: light;
+}
+
+/* Blueprint grid → dark hairlines on light paper */
+:root[data-theme="light"] .grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(16, 16, 22, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 16, 22, 0.05) 1px, transparent 1px);
+}
+
+/* Ambient background orbs tint (multiply) instead of washing out light bg.
+   Scoped to .ambient-orb so project-preview .orb blobs are unaffected. */
+:root[data-theme="light"] .ambient-orb {
+  opacity: 0.2 !important;
+  mix-blend-mode: multiply;
+}
+
+/* Grain is distracting on white — nearly remove it */
+:root[data-theme="light"] .noise {
+  opacity: 0.015;
+  mix-blend-mode: normal;
+}
+
+/* Shadows: real soft drop + light inset highlight (dark inset is invisible) */
+:root[data-theme="light"] .shadow-elevated {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 18px 42px -22px rgba(20, 22, 60, 0.22);
+}
+:root[data-theme="light"] .shadow-glow {
+  box-shadow: 0 0 40px -10px color-mix(in oklab, var(--color-accent) 30%, transparent);
+}
+
+/* Ghost button hover: dark wash on light instead of white-on-white */
+:root[data-theme="light"] .btn-ghost:hover {
+  background: color-mix(in oklab, #101018 6%, transparent);
+}
+
+/* Shimmer sweep: dark glint reads better than white on light cards */
+:root[data-theme="light"] .shimmer-line::after {
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(16, 16, 22, 0.06),
+    transparent
+  );
+}
+
+/* Scrollbar: light track + soft grey thumb */
+@media (pointer: fine) {
+  :root[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: #c8c9d4;
+  }
+  :root[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: #aeafbc;
+  }
+}
+
+/* Smooth the paint when the user flips the toggle */
+:root[data-theme] body {
+  transition: background-color 0.4s var(--ease-out-quart),
+    color 0.4s var(--ease-out-quart);
+}
+
+/* ============================================================
+   X-RAY SCANNER  (hero ProfilePhoto)
+   A crisp cyan scan line trailing a soft glow band sweeps the
+   portrait top→bottom on a loop, subtly faster on hover.
+   Premium/technical, not medical. Uses `screen` blend so it
+   only lightens the dark studio backdrop.
+   ============================================================ */
+@keyframes xrayScan {
+  0%   { transform: translateY(-115%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(322%); opacity: 0; }
+}
+
+.xray-scanner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 34%;
+  pointer-events: none;
+  will-change: transform;
+  mix-blend-mode: screen;
+  animation: xrayScan 4.4s var(--ease-out-quart) infinite;
+}
+/* Speed up while hovering the portrait (container carries .xray) */
+.xray:hover .xray-scanner {
+  animation-duration: 2.6s;
+}
+.xray-band {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklab, var(--color-accent-2) 9%, transparent) 55%,
+    color-mix(in oklab, var(--color-accent-2) 22%, transparent) 90%,
+    transparent 100%
+  );
+}
+.xray-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-accent-2) 82%, white),
+    transparent
+  );
+  box-shadow: 0 0 14px 2px color-mix(in oklab, var(--color-accent-2) 55%, transparent);
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   CustomCursor.tsx adds `.cursor-none` to <html> only when a fine
+   pointer is present and motion is allowed, then draws its own
+   dot + lagging ring. Hide the native cursor everywhere beneath it.
+   ============================================================ */
+.cursor-none,
+.cursor-none * {
+  cursor: none !important;
+}
