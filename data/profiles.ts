@@ -129,13 +129,13 @@ export const experiences: Record<ProfileId, ExperienceConfig> = {
     framing: {
       about: {
         eyebrow: "About me",
-        title: "A developer who likes to build things that work.",
+        title: "Turning ideas into thoughtful, scalable web experiences.",
         navLabel: "About",
       },
 
       services: {
         eyebrow: "What I do",
-        title: "Services",
+        title: "From concept to a polished digital product.",
         description:
           "From responsive interfaces to full-stack web applications, I build practical digital experiences with modern web technologies.",
         navLabel: "Services",
@@ -145,7 +145,7 @@ export const experiences: Record<ProfileId, ExperienceConfig> = {
         eyebrow: "Stack",
         title: "Tech stack",
         description:
-          "The languages, frameworks and tools I build with — grouped by layer, not ranked by an arbitrary percentage.",
+          "A practical toolkit spanning frontend development, backend services, databases, and modern web tooling.",
         navLabel: "Stack",
       },
 
@@ -153,13 +153,13 @@ export const experiences: Record<ProfileId, ExperienceConfig> = {
         eyebrow: "Track record",
         title: "Where I've applied it",
         description:
-          "The roles where my skills and technologies have gone into real-world development work.",
+          "The roles where I’ve applied my skills to building and delivering real-world web applications.",
         navLabel: "Experience",
       },
 
       education: {
         eyebrow: "Education",
-        title: "Academic background",
+        title: "Academic background & certifications",
         navLabel: "Education",
       },
 
@@ -167,19 +167,19 @@ export const experiences: Record<ProfileId, ExperienceConfig> = {
         eyebrow: "Work",
         title: "Things I've built",
         description:
-          "Full-stack builds, personal projects and experiments — the code, the stack and the patterns behind them.",
+          "A selection of full-stack and frontend projects built with modern technologies and practical engineering principles.",
         navLabel: "Projects",
       },
 
       testimonials: {
         eyebrow: "Feedback",
-        title: "What people say",
+        title: "Trusted by the people I've worked with.",
         navLabel: "Testimonials",
       },
 
       contact: {
-        eyebrow: "Let's connect",
-        title: "Have a project in mind?",
+        eyebrow: "Get in touch",
+        title: "Have an idea? Let's bring it to life.",
         navLabel: "Contact",
       },
     },

@@ -167,14 +167,13 @@ export function Contact({ index = "05" }: { index?: string }) {
           <SectionHeading
             index={index}
             eyebrow="Contact"
-            title="Let's build something"
+            title="Have an idea? Let's bring it to life."
           />
 
           <Reveal delay={0.1}>
             <p className="mt-5 max-w-md text-[clamp(1rem,2.5vw,1.1rem)] leading-relaxed text-muted">
-              Have a project in mind, a role to fill, or just want to connect?
-              I&apos;d be glad to hear about it — send a message and I&apos;ll
-              get back to you.
+            Have a project, opportunity, or just want to connect?
+            I&apos;d love to hear from you. Send me a message.
             </p>
           </Reveal>
 

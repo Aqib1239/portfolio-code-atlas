@@ -34,12 +34,12 @@ export function Footer() {
           </div>
 
           {/* Nav + social */}
-          <div className="flex flex-col gap-6 sm:flex-row sm:gap-14">
+          <div className="flex flex-col gap-10 sm:flex-row sm:gap-14">
             <nav aria-label="Footer">
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-subtle">
                 Navigate
               </span>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-3 grid grid-cols-2 lg:grid-cols-1 gap-2">
                 {navItems.map((item) => (
                   <li key={item.id}>
                     <a

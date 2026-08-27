@@ -85,13 +85,13 @@ export function Experience({
                 {item.highlights.map((point) => (
                   <li
                     key={point}
-                    className="flex gap-3 text-[0.95rem] text-muted"
+                    className="flex gap-3 text-[0.95rem] text-muted text-left leading-relaxed"
                   >
                     <span
                       aria-hidden="true"
                       className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"
                     />
-                    <span>{point}</span>
+                    <span className="">{point}</span>
                   </li>
                 ))}
               </ul>

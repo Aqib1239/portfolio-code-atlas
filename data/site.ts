@@ -42,7 +42,7 @@ export const siteConfig = {
     "MERN Stack Developer with 1.5+ years of professional experience building modern, responsive, and scalable web applications. Experienced in React.js, Next.js, JavaScript, TypeScript, Node.js, Express.js, MongoDB, and modern UI technologies, with a strong focus on frontend development, responsive design, user experience, and clean maintainable code.",
   // Short line used in the hero beneath the name.
   tagline:
-    "I build fast, scalable and polished web experiences with modern JavaScript.",
+    "I build fast, scalable, and polished web applications with modern JavaScript. Focused on responsive interfaces, intuitive user experiences, and clean, maintainable code.",
   // Canonical URL — currently the existing live portfolio (real, provided).
   // Change to this rebuild's deployment URL once it is live.
   url: "https://maqib-sigma.vercel.app",

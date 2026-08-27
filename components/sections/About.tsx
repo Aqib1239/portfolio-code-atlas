@@ -32,7 +32,9 @@ function Fact({ icon, label, value, sub }: FactProps) {
         <div className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-subtle">
           {label}
         </div>
-        <div className="mt-0.5 truncate font-medium text-foreground">{value}</div>
+        <div className="mt-0.5 truncate font-medium text-foreground">
+          {value}
+        </div>
         {sub ? <div className="text-sm text-muted">{sub}</div> : null}
       </div>
     </div>
@@ -61,10 +63,10 @@ export function About({
         description={description}
       />
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+      <div className="mt-8 grid min-w-0 gap-8 sm:mt-10 lg:mt-12 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
         {/* Prose */}
-        <Reveal className="flex flex-col gap-5 text-[clamp(1rem,2.5vw,1.1rem)] leading-relaxed text-muted">
-          <p>
+        <Reveal className="flex min-w-0 flex-col gap-5 text-[clamp(0.95rem,2.5vw,1.1rem)] leading-relaxed text-muted">
+          <p className="break-words text-justify">
             I&apos;m a{" "}
             <span className="text-foreground">MERN stack developer</span> based
             in {siteConfig.location}, with {siteConfig.yearsExperience} years of
@@ -72,58 +74,69 @@ export function About({
             applications. My work centres on the frontend — turning interfaces
             into experiences that feel fast, considered and easy to use.
           </p>
-          <p>
+
+          <p className="break-words text-justify">
             Day to day I work across{" "}
             <span className="text-foreground">
               React.js, Next.js, TypeScript
             </span>{" "}
             and the wider JavaScript ecosystem, backed by{" "}
-            <span className="text-foreground">Node.js, Express and MongoDB</span>{" "}
+            <span className="text-foreground">
+              Node.js, Express and MongoDB
+            </span>{" "}
             on the server. I care about reusable component architecture,
             sensible state management and code that stays readable as a project
             grows.
           </p>
-          <p>
+
+          <p className="break-words text-justify">
             Whether it&apos;s a design system, a production dashboard or a
-            marketing site, I aim for the same result: a polished,
-            accessible interface that performs well on every screen — from a
-            360px phone to a widescreen display.
+            marketing site, I aim for the same result: a polished, accessible
+            interface that performs well on every screen — from a 360px phone to
+            a widescreen display.
           </p>
 
-          <ul className="mt-2 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-1 grid min-w-0 gap-3 sm:grid-cols-2">
             {strengths.map((item) => (
-              <li key={item} className="flex items-center gap-2.5">
+              <li
+                key={item}
+                className="flex min-w-0 items-start gap-2.5 text-sm sm:text-base"
+              >
                 <Icon
                   name="check"
                   size={16}
-                  className="shrink-0 text-accent-bright"
+                  className="mt-1 shrink-0 text-accent-bright"
                 />
-                <span className="text-foreground">{item}</span>
+                <span className="min-w-0 break-words text-foreground">
+                  {item}
+                </span>
               </li>
             ))}
           </ul>
         </Reveal>
 
         {/* Quick facts */}
-        <Reveal delay={0.1}>
-          <Card spotlight className="flex flex-col gap-6 p-6 sm:p-7">
-            <Fact
-              icon="map-pin"
-              label="Location"
-              value={siteConfig.location}
-            />
+        <Reveal delay={0.1} className="min-w-0">
+          <Card
+            spotlight
+            className="flex min-w-0 flex-col gap-5 p-4 sm:gap-6 sm:p-7"
+          >
+            <Fact icon="map-pin" label="Location" value={siteConfig.location} />
+
             <Fact
               icon="briefcase"
               label="Experience"
               value={`${siteConfig.yearsExperience} years`}
               sub="Professional, full-time"
             />
+
             <Fact
               icon="terminal"
               label="Currently"
               value={currentRole.role}
               sub={currentRole.company}
             />
+
             {topEducation ? (
               <Fact
                 icon="graduation-cap"

@@ -34,7 +34,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center pb-20 pt-20"
+      className="relative flex min-h-[100svh] items-center pb-20 pt-28"
     >
       <div className="container-page">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
@@ -64,7 +64,7 @@ export function Hero() {
 
             <motion.h1
               variants={fadeUp}
-              className="mt-4 font-display text-[clamp(2.5rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-tight"
+              className="mt-20 lg:mt-10 font-display text-[clamp(2.5rem,8vw,4.5rem)] font-semibold leading-[1.02] tracking-tight"
             >
               Hi, I&apos;m{" "}
               <span className="text-gradient">{siteConfig.shortName}</span>.
@@ -79,15 +79,14 @@ export function Hero() {
 
             <motion.p
               variants={fadeUp}
-              className="mt-6 max-w-xl text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed text-muted"
+              className="mt-4 max-w-xl text-[clamp(0.95rem,2.5vw,1.05rem)] leading-relaxed text-muted"
             >
-              {siteConfig.tagline} Focused on responsive design, thoughtful user
-              experience, and clean, maintainable code.
+              {siteConfig.tagline}
             </motion.p>
 
             <motion.div
               variants={fadeUp}
-              className="mt-8 flex flex-wrap items-center gap-3"
+              className="mt-6 flex flex-wrap items-center gap-3"
             >
               <MagneticButton>
                 <Button
@@ -157,7 +156,7 @@ export function Hero() {
 
       {/* Scroll hint (desktop) */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 hidden justify-center lg:flex">
-        <div className="flex h-9 w-5 items-start justify-center rounded-full border border-border p-1">
+        <div className="flex h-9 w-5 items-start justify-center rounded-full border border-syntax-prop p-1">
           <span className="h-2 w-0.5 animate-scroll-hint rounded-full bg-accent-bright" />
         </div>
       </div>

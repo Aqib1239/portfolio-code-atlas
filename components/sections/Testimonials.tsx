@@ -18,7 +18,7 @@ export function Testimonials({
   index = "05",
   eyebrow = "Testimonials",
   title = "Kind words from people I've worked with",
-  description = "Feedback from colleagues, managers and collaborators on what it's like to build alongside me.",
+  description = "Insights from colleagues, managers, and collaborators about their experience working with me.",
 }: TestimonialsProps) {
   return (
     <Section id="testimonials">

@@ -19,7 +19,7 @@ export function Education({
   index = "05",
   eyebrow = "Education",
   title = "Academic background",
-  description = "My academic foundation in computer science and the certifications that complement my technical skills.",
+  description = "My academic foundation, certifications, and continued learning in technology and software development.",
 }: EducationProps) {
   return (
     <Section id="education">
